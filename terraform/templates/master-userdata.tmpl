@@ -4,7 +4,7 @@
 # Bootstrap the salt master
 ##############################
 
-# Make sure git and wget are available
+# Make sure required packages are available
 apt update
 apt install -y git wget python-boto
 
@@ -27,10 +27,12 @@ pillar_roots:
 auto_accept: True
 CONFIG
 
+# Tell Salt that we are the master
 echo "master: 127.0.0.1" > /etc/salt/minion.d/master.conf
 
-# Install salt
+# Install salt master
 wget -O /tmp/bootstrap-salt.sh https://bootstrap.saltstack.com
 sh /tmp/bootstrap-salt.sh -M
 
+# Sync the grains to get the ec2 tags
 salt '*' saltutil.sync_grains

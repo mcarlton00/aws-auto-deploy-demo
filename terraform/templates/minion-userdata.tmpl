@@ -20,6 +20,7 @@ sh /tmp/bootstrap-salt.sh
 # Wait for key to be accepted
 sleep 30
 
+# Sync the grains to make the ec2 tags available
 salt-call saltutil.sync_grains
 
 # Deploy site
