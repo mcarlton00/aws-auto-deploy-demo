@@ -1,0 +1,26 @@
+{% set supervisor = salt['grains.filter_by']({
+    'default': {
+        'conf_dir': '/etc/supervisord.d',
+        'conf_file': '/etc/supervisord.conf',
+        'service': 'supervisor',
+        'pkg': 'supervsior',
+    },
+    'RedHat': {
+        'conf_dir': '/etc/supervisord.d',
+        'conf_file': '/etc/supervisord.conf',
+        'service': 'supervisor',
+        'pkg': 'supervsior',
+    },
+    'Debian': {
+        'conf_dir': '/etc/supervisord/conf.d',
+        'conf_file': '/etc/supervisor/supervisord.conf',
+        'service': 'supervisor',
+        'pkg': 'supervisor',
+    },
+    'FreeBSD': {
+        'conf_dir': '/usr/local/etc/supervisord.d',
+        'conf_file': '/usr/local/etc/supervisord.conf',
+        'service': 'supervisord',
+        'pkg': 'py27-supervsior',
+    },
+}, merge=salt['pillar.get']('supervisor:lookup')) %}

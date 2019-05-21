@@ -1,0 +1,36 @@
+#!/bin/bash
+
+##############################
+# Bootstrap the salt master
+##############################
+
+# Make sure git and wget are available
+apt update
+apt install -y git wget python-boto
+
+# Checkout Salt states from github
+git clone https://github.com/mcarlton00/cloudconf-saltstack.git /srv/salt
+
+# Create Salt directory
+mkdir -p /etc/salt/master.d
+mkdir -p /etc/salt/minion.d
+
+# Tell salt where to find states
+cat <<CONFIG >> /etc/salt/master.d/custom.conf
+file_roots:
+  base:
+    - /srv/salt/states
+pillar_roots:
+  base:
+    - /srv/salt/pillar
+
+auto_accept: True
+CONFIG
+
+echo "master: 127.0.0.1" > /etc/salt/minion.d/master.conf
+
+# Install salt
+wget -O /tmp/bootstrap-salt.sh https://bootstrap.saltstack.com
+sh /tmp/bootstrap-salt.sh -M
+
+salt '*' saltutil.sync_grains

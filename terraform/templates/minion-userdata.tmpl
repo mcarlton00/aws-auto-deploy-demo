@@ -1,0 +1,26 @@
+#!/bin/bash
+##############################
+# Bootstrap the various app servers
+##############################
+
+# Install required packages
+apt update
+apt install -y wget python python-boto
+
+# Create salt config directory
+mkdir -p /etc/salt/minion.d
+
+# Tell the minion where to find the master
+echo master: ${salt_master} > /etc/salt/minion.d/master.conf
+
+# Install salt
+wget -O /tmp/bootstrap-salt.sh https://bootstrap.saltstack.com
+sh /tmp/bootstrap-salt.sh
+
+# Wait for key to be accepted
+sleep 30
+
+salt-call saltutil.sync_grains
+
+# Deploy site
+salt-call state.apply

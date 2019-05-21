@@ -1,0 +1,4 @@
+.vagrant
+*.log
+*.terraform
+terraform.tfstate*

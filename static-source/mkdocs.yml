@@ -1,0 +1,6 @@
+site_name: AWS Demo
+theme:
+  name: material
+
+nav:
+  - Home: index.md
