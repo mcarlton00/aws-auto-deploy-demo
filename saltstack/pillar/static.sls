@@ -1,3 +1,3 @@
 static:
-  repo: https://github.com/mcarlton00/cloudconf-static.git
-  project_dir: /usr/local/www/static
+  repo: https://github.com/mcarlton00/aws-auto-deploy-demo.git
+  project_dir: /srv/static-html

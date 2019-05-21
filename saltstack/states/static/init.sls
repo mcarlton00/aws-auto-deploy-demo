@@ -20,16 +20,7 @@ static-nginx-config:
 source-directory:
   file.directory:
     - name: {{ static_pillar.project_dir }}
-    - user: root
-    - group: {{ global.group }}
-    - dir_mode: 700
+    - user: www-data
+    - group: www-data
+    - dir_mode: 775
 
-website-source:
-  git.latest:
-    - name: {{ static_pillar.repo }}
-    - user: root
-    - target: {{ static_pillar.project_dir }}
-    - rev: master
-    - branch: master
-    - require_in:
-      - service: nginx

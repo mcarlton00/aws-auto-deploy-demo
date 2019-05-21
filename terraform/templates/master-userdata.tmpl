@@ -9,7 +9,7 @@ apt update
 apt install -y git wget python-boto
 
 # Checkout Salt states from github
-git clone https://github.com/mcarlton00/cloudconf-saltstack.git /srv/salt
+git clone https://github.com/mcarlton00/aws-auto-deploy-demo.git /srv/
 
 # Create Salt directory
 mkdir -p /etc/salt/master.d
@@ -19,10 +19,10 @@ mkdir -p /etc/salt/minion.d
 cat <<CONFIG >> /etc/salt/master.d/custom.conf
 file_roots:
   base:
-    - /srv/salt/states
+    - /srv/saltstack/states
 pillar_roots:
   base:
-    - /srv/salt/pillar
+    - /srv/saltstack/pillar
 
 auto_accept: True
 CONFIG
