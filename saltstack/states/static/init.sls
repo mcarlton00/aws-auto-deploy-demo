@@ -21,7 +21,7 @@ website-source:
   git.latest:
     - name: {{ static_pillar.repo }}
     - user: root
-    - target: /srv/static-html
+    - target: /srv
     - rev: master
     - branch: master
     - require_in:
@@ -29,12 +29,12 @@ website-source:
 
 source-directory:
   file.directory:
-    - name: {{ static_pillar.repo }}
+    - name: /srv/static-html
     - user: www-data
     - group: www-data
     - dir_mode: 775
     - require_in:
       - service: nginx
     - require:
-      - file: {{ static_pillar.repo }}
+      - static: website-source
 
