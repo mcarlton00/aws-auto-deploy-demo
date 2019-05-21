@@ -36,5 +36,5 @@ source-directory:
     - require_in:
       - service: nginx
     - require:
-      - static: website-source
+      - git: website-source
 
